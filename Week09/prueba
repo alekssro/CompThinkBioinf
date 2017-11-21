@@ -1,0 +1,53 @@
+init_probs_7_state = [0.00, 0.00, 0.00, 1.00, 0.00, 0.00, 0.00]
+
+trans_probs_7_state = [
+    [0.00, 0.00, 0.90, 0.10, 0.00, 0.00, 0.00],
+    [1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+    [0.00, 1.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+    [0.00, 0.00, 0.05, 0.90, 0.05, 0.00, 0.00],
+    [0.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00],
+    [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 1.00],
+    [0.00, 0.00, 0.00, 0.10, 0.90, 0.00, 0.00],
+]
+
+emission_probs_7_state = [
+    #   A     C     G     T
+    [0.30, 0.25, 0.25, 0.20],
+    [0.20, 0.35, 0.15, 0.30],
+    [0.40, 0.15, 0.20, 0.25],
+    [0.25, 0.25, 0.25, 0.25],
+    [0.20, 0.40, 0.30, 0.10],
+    [0.30, 0.20, 0.30, 0.20],
+    [0.15, 0.30, 0.20, 0.35],
+]
+
+class hmm:
+    def __init__(self, init_probs, trans_probs, emission_probs):
+        self.init_probs = init_probs
+        self.trans_probs = trans_probs
+        self.emission_probs = emission_probs
+
+# Collect the matrices in a class.
+hmm_7_state = hmm(init_probs_7_state, trans_probs_7_state, emission_probs_7_state)
+
+
+# We can now reach the different matrices by their names. E.g.:
+len(hmm_7_state.trans_probs)
+
+# The initial probabilities must sum to 1.
+# Each row in the matrix of transition probabilities must sum to 1.
+# Each row in the matrix of emission probabilities must sum to 1.
+# All numbers should be between 0 and 1, inclusive.
+
+def validate_hmm(model):
+
+    #Check initial probabilities must sum to 1
+    if sum(model.init_probs) == 1:
+        #Check rows in matrix of transition probabilities sum to 1
+        for i in range(len(model.trans_probs)):
+            
+            pass
+        if sum(model[2][])
+    return False
+
+validate_hmm(hmm_7_state)
