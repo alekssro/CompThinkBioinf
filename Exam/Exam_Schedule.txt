@@ -1,0 +1,30 @@
+The final exam in “Computational Thinking in Bioinformatics” (CTiB) is an individual oral exam (20 minutes without preparation time), which includes a presentation based on an exam question (chosen randomly among the questions below) followed by a general discussion of related topics and in particular the mandatory projects. You should prepare a 10-12 minutes presentation for each exam question covering the topics that you find relevant to the question (you can bring your notes to the exam, but you should not use them extensively during your presentation). The total examination time is about 15 minutes, as the 20 minutes also includes time for deciding your grade and feedback.
+
+The oral exams will be on January 19, 2018, in Room 1110-100, starting at 09:00.
+
+
+--------------------------------------------------------------------
+Exam in Computational Thinking in Bioinformatics, Fall 2017
+--------------------------------------------------------------------
+
+Time:  January 19, 2018, starting 09:00
+Place: Lecture Room 1111-100, C.F. Møllers Alle 8, 8000 Aarhus C
+Type:  Oral exam without preparation (20 min)
+
+The exams will take in the following order. To take the exam, you must
+have passed all five mandatory projects. 
+
+Friday, Jan 19, 2018, starting at 09:00, in room 1111-100
+------------------------------------------------------------
+
+* Muna Hasan Mohamed
+* Christian Stenvang
+* Tine Sneibjerg Ebsen
+* Mikkel Tschenka Skyum Eriksen
+* Emil Maag
+* Judit Kisistok
+* Meritxell Riera
+* Matej Stevuliak
+* Alejandro Roca Arroyo
+* Anna Vincent
+* Ky Marco Gurasz
