@@ -210,7 +210,7 @@ def viterbi_log(model, x):
 
     K = len(model.init_probs)
     N = len(x)
-    
+
     ############# log probs in model #############
     emission_probs = make_table(K, len(model.emission_probs[0]))
     trans_probs = make_table(K, K)
@@ -221,12 +221,10 @@ def viterbi_log(model, x):
         for j in range(len(model.emission_probs[i])):
             emission_probs[i][j] = log(model.emission_probs[i][j])
 
-    print(emission_probs)
     #transition
     for i in range(K):
         for j in range(K):
             trans_probs[i][j] = log(model.trans_probs[i][j])
-    print(trans_probs)
 
     ############# Calculate w matrix #############
     w = make_table_log(K, N)
