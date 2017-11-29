@@ -162,7 +162,7 @@ def translate_path_to_indices_7state(obs):
     mapping = {"c":"012", "n":"3", "r":"456"}
     return [int(s) for s in [mapping[symbol.lower()] for symbol in obs]]
 
-def translate_path_to_indices_7state_forloop(obs):
+def translate_path_to_indices_7state(obs):
     lst1 = []
     c = 0
     r = 4
@@ -182,9 +182,6 @@ def translate_path_to_indices_7state_forloop(obs):
                 r+=1
             else:
                 r=4
-
-
-
 
     return lst1
 
@@ -421,7 +418,7 @@ def training_by_counting(K, D, x, z):
 
 # Get the training set
 x = translate_observations_to_indices(g1["genome1"])
-z = translate_path_to_indices_7state_forloop(true_ann1)
+z = translate_path_to_indices_7state(true_ann1)
 
 # Get the model
 hmm_7_state_genome1 = training_by_counting(7, 4, x, z)
@@ -477,7 +474,7 @@ print(compute_accuracy(true_ann2_3state, pred_ann2_3state))
 
 # Get the training set
 x = translate_observations_to_indices(g2["genome2"])
-z = translate_path_to_indices_7state_forloop(true_ann2)
+z = translate_path_to_indices_7state(true_ann2)
 
 # Get the model
 hmm_7_state_genome2 = training_by_counting(7, 4, x, z)
