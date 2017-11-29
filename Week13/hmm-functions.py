@@ -108,18 +108,32 @@ def viterbi_log(model, x):
     K = len(model.init_probs)
     N = len(x)
 
+    ############# log probs in model #############
+    emission_probs = make_table(K, len(model.emission_probs[0]))
+    trans_probs = make_table(K, K)
+    # init
+    init_probs = [log(y) for y in model.init_probs]
+    # emission
+    for i in range(K):
+        for j in range(len(model.emission_probs[i])):
+            emission_probs[i][j] = log(model.emission_probs[i][j])
+    #transition
+    for i in range(K):
+        for j in range(K):
+            trans_probs[i][j] = log(model.trans_probs[i][j])
+
     ############# Calculate w matrix #############
     w = make_table_log(K, N)
 
     # Base case: fill out w[i][0] for i = 0..k-1
     for i in range(K):
-        w[i][0] = log(model.init_probs[i]) + log(model.emission_probs[i][x[0]])
+        w[i][0] = init_probs[i] + emission_probs[i][x[0]]
 
     # Inductive case: fill out w[i][j] for i = 0..k, j = 0..n-1
     for j in range(1, N):
         for i in range(K):
             for t in range(K):
-                w[i][j] = max(w[i][j], log(model.emission_probs[i][x[j]]) + w[t][j-1] + log(model.trans_probs[t][i]))
+                w[i][j] = max(w[i][j], emission_probs[i][x[j]] + w[t][j-1] + trans_probs[t][i])
 
 
     ############# Backtracking #############
@@ -136,8 +150,8 @@ def viterbi_log(model, x):
     #check which state did we come from
     for n in range(N-2, -1, -1):
         for k in range(K):
-            if(w[k][n] + log(model.emission_probs[z[n+1]][x[n+1]]) +
-               log(model.trans_probs[k][z[n+1]])) == w[z[n+1]][n+1]:
+            if(w[k][n] + emission_probs[z[n+1]][x[n+1]] +
+               trans_probs[k][z[n+1]]) == w[z[n+1]][n+1]:
                 z[n] = k
                 break
 
