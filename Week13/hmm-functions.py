@@ -100,6 +100,49 @@ def make_table_log(m, n):
     """Make a table with `m` rows and `n` columns filled with -inf."""
     return [[float("-inf")] * n for _ in range(m)]
 
+def viterbi_log(model, x):
+    """Function that calculates the optimal path for a sequence of observations and a model
+        Input: model = hmm class model; x = indices of sequence of observations
+        Output: z = optimal path of states"""
+
+    K = len(model.init_probs)
+    N = len(x)
+
+    ############# Calculate w matrix #############
+    w = make_table_log(K, N)
+
+    # Base case: fill out w[i][0] for i = 0..k-1
+    for i in range(K):
+        w[i][0] = log(model.init_probs[i]) + log(model.emission_probs[i][x[0]])
+
+    # Inductive case: fill out w[i][j] for i = 0..k, j = 0..n-1
+    for j in range(1, N):
+        for i in range(K):
+            for t in range(K):
+                w[i][j] = max(w[i][j], log(model.emission_probs[i][x[j]]) + w[t][j-1] + log(model.trans_probs[t][i]))
+
+
+    ############# Backtracking #############
+    z = [None] * N
+    max_ind = None
+    max_path = float("-inf")
+
+    #start with the state with higher probability in last column
+    for i in range(K-1):
+        if(max_path < w[i][N-1]):
+            max_path = max(max_path, w[i][N-1])
+            z[N-1] = i
+
+    #check which state did we come from
+    for n in range(N-2, -1, -1):
+        for k in range(K):
+            if(w[k][n] + log(model.emission_probs[z[n+1]][x[n+1]]) +
+               log(model.trans_probs[k][z[n+1]])) == w[z[n+1]][n+1]:
+                z[n] = k
+                break
+
+    return z
+
 # Your implementations of compute_w_log and opt_path_prob_log from week 10
 def compute_w_log(model, x):
     k = len(model.init_probs)
