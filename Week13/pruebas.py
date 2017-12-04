@@ -236,98 +236,6 @@ def viterbi_log(model, x):
     return z
 
 
-# ## Finding genes in a genome
-
-# Recall from the lecture that both the 7- and 3-state model is useful for prediction of gene structure. In the cells below, use your Viterbi implementation to compute an annotation for genome 1 and 2 using the two models. Save the annotation in a variable (remember to translate the indicies to a path using `translate_indices_to_path`). Feel free to define a function that wraps `compute_w_log` and `backtrack_log` so that you don't have to call both functions each time you want an annotation for a sequence.
-
-# Your code here for computing the gene structure for genome 1 and 2 using the 7-state model
-t0 = time.time()
-z = viterbi_log(model = hmm_7_state, x = translate_observations_to_indices(g1["genome1"]))
-t1 = time.time()
-print("Elapsed time for computing the gene structure for genome 1 using the 7-state model:", t1-t0)
-pred_ann1_7state = translate_indices_to_path_7state(z)
-
-t0 = time.time()
-z = viterbi_log(hmm_7_state, translate_observations_to_indices(g2['genome2']))
-t1 = time.time()
-print("Elapsed time for computing the gene structure for genome 2 using the 7-state model:", t1-t0)
-pred_ann2_7state = translate_indices_to_path_7state(z)
-
-
-# Your code here for computing the gene structure for genome 1 and 2 using the 3-state model
-t0 = time.time()
-z = viterbi_log(hmm_3_state, translate_observations_to_indices(g1['genome1']))
-t1 = time.time()
-print("Elapsed time for computing the gene structure for genome 1 using the 3-state model:", t1-t0)
-pred_ann1_3state = translate_indices_to_path_3state(z)
-
-t0 = time.time()
-z = viterbi_log(hmm_3_state, translate_observations_to_indices(g2['genome2']))
-t1 = time.time()
-print("Elapsed time for computing the gene structure for genome 2 using the 3-state model:", t1-t0)
-pred_ann2_3state = translate_indices_to_path_3state(z)
-
-
-# ## Comparing annotations
-
-# We will now compare the predicted annotations to the true annotations. Read the true annotations (`true-ann1.fa` and `true-ann2.fa`) and use the `compute_accuracy` function given below to compare the predicted annotation to the true annotation.
-
-def compute_accuracy(true_ann, pred_ann):
-    if len(true_ann) != len(pred_ann):
-        return 0.0
-    return sum(1 if true_ann[i] == pred_ann[i] else 0
-               for i in range(len(true_ann))) / len(true_ann)
-
-
-# **Question 1:** What is the accuracy of your prediction on genome 1 using the 7-state model?
-
-true_ann1_7state = read_fasta_file('true-ann1.fa')
-true_ann1_7state = true_ann1_7state['true-ann1']
-print(compute_accuracy(true_ann1_7state, pred_ann1_7state))
-
-
-# 0.3919363693634507
-
-# **Question 2:** What is the accuracy of your prediction on genome 2 using the 7-state model?
-
-
-true_ann2_7state = read_fasta_file('true-ann2.fa')
-true_ann2_7state = true_ann2_7state['true-ann2']
-print(compute_accuracy(true_ann2_7state, pred_ann2_7state))
-
-
-# 0.37192203428917675
-
-# **Question 3:** What is the accuracy of your prediction on genome 1 using the 3-state model?
-
-true_ann1_3state = read_fasta_file('true-ann1.fa')
-true_ann1_3state = true_ann1_3state['true-ann1']
-print(compute_accuracy(true_ann1_3state, pred_ann1_3state))
-
-
-# 0.31873349812490653
-
-# **Question 4:** What is the accuracy of your prediction on genome 2 using the 3-state model?
-
-true_ann2_3state = read_fasta_file('true-ann2.fa')
-true_ann2_3state = true_ann2_3state['true-ann2']
-print(compute_accuracy(true_ann2_3state, pred_ann2_3state))
-
-
-# 0.35088368223162264
-
-# ## Training a model
-
-# Above, we used the stock `hmm_7_state` and `hmm_3_state` for prediction. In a real application, one would train the HMM on genomes with known gene structure in order to make a model that reflects reality.
-#
-# Make a HMM `hmm_7_state_genome1` (and `hmm_3_state_genome1`) that has a transition diagram similar to `hmm_7_state` (and `hmm_3_state`), but where the transition, emission, and initial probabilities are set by training by counting on `genome1.fa` and its corresponding true gene structure as given in `true-ann1.fa`.
-#
-# You should be able to use your implementation of training by counting as developed last week, but you must translate the annotation in `annotation1.fa` into a proper sequence of hidden states, i.e. the 7-state model the annotation `NCCCNRRRN` would correspond to `321034563`.
-#
-# Using the trained HMM `hmm_7_state_genome1` (and `hmm_3_state_genome1`) to predict the gene structure of genome 2, and compare the predicted annotation to true annotation (`true-ann2.fa`). Is the accurracy better than your prediction on genome 2 using `hmm_7_state` (and `hmm_3_state`)?
-#
-# Implement training by counting in the cell below. We'll use it to train a new model for predicting genes. Feel free to define any helper functions you find useful.
-
 # Your code to get hmm_7_state_genome1 using training by counting on genome 1,
 # predict an annotation of genome 2, and compare the prediction to true-ann2.fa
 def training_by_counting(K, D, x, z):
@@ -374,10 +282,8 @@ def training_by_counting(K, D, x, z):
     return hmm(matrix_init, matrix_trans, matrix_emission)
 
 
-# **Question 5:** What is your accuracy of your prediction on genome 2 using `hmm_7_state_genome1`?
-
-# Your code to get hmm_7_state_genome1 using training by counting on genome 1,
-# predict an annotation of genome2 , and compare the prediction to true-ann2.fa
+true_ann1_7state = read_fasta_file('true-ann1.fa')
+true_ann1_7state = true_ann1_7state['true-ann1']
 
 # Get the training set
 x = translate_observations_to_indices(g1["genome1"])
@@ -386,104 +292,24 @@ z = translate_path_to_indices_7state(true_ann1_7state)
 # Get the model
 hmm_7_state_genome1 = training_by_counting(7, 4, x, z)
 
-# Predict annotation of genome2
-t0 = time.time()
-z_pred = viterbi_log(hmm_7_state_genome1, translate_observations_to_indices(g2["genome2"]))
-t1 = time.time()
-print("Elapsed time for computing the gene structure for genome 2 using the 7-state-genome1 model:", t1-t0)
-pred_ann2_7state = translate_indices_to_path_7state(z_pred)
+import numpy as np
+np.set_printoptions(precision=5)
+print(hmm_7_state_genome1.init_probs)
+print(np.matrix(hmm_7_state_genome1.trans_probs))
+print(np.matrix(hmm_7_state_genome1.emission_probs))
 
-#Compare prediction accuracy
-true_ann2_7state = read_fasta_file('true-ann2.fa')
-true_ann2_7state = true_ann2_7state['true-ann2']
-print(compute_accuracy(true_ann2_7state, pred_ann2_7state))
-
-
-# 0.7829883539793396
-
-# **Question 6:** What is your accuracy of your prediction on genome 2 using `hmm_3_state_genome1`?
-
-# Your code to get hmm_3_state_genome1 using training by counting on genome 1,
-# predict an annotation of genome2 , and compare the prediction to true-ann2.fa
+true_ann1_3state = read_fasta_file('true-ann1.fa')
+true_ann1_3state = true_ann1_3state['true-ann1']
 
 # Get the training set
 x = translate_observations_to_indices(g1["genome1"])
 z = translate_path_to_indices_3state(true_ann1_3state)
 
 # Get the model
-hmm_3_state_genome1 =training_by_counting(3, 4, x, z)
+hmm_3_state_genome1 = training_by_counting(3, 4, x, z)
 
-# Predict annotation of genome2
-t0 = time.time()
-z_pred = viterbi_log(hmm_3_state_genome1, translate_observations_to_indices(g2["genome2"]))
-t1 = time.time()
-print("Elapsed time for computing the gene structure for genome 2 using the 3-state-genome1 model:", t1-t0)
-pred_ann2_3state = translate_indices_to_path_3state(z_pred)
-
-#Compare prediction accuracy
-true_ann2_3state = read_fasta_file('true-ann2.fa')
-true_ann2_3state = true_ann2_3state['true-ann2']
-print(compute_accuracy(true_ann2_3state, pred_ann2_3state))
-
-
-# 0.57368917266
-
-# Redo the above, where you train on genome 2 and predict on genome 1, i.e. make model `hmm_7_state_genome2` (and `hmm_3_state_genome2`) using training by counting on `true-ann2.fa`, predict the gene structure of `genome1.fa` and compare your prediction against `true-ann1.fa`.
-
-# **Question 7:** What is your accuracy of your prediction on genome 1 using `hmm_7_state_genome2`?
-
-# Your code to get hmm_7_state_genome2 using training by counting on genome 2,
-# predict an annotation of genome 1, and compare the prediction to true-ann1.fa
-
-# Get the training set
-x = translate_observations_to_indices(g2["genome2"])
-z = translate_path_to_indices_7state(true_ann2_7state)
-
-# Get the model
-hmm_7_state_genome2 = training_by_counting(7, 4, x, z)
-
-# Predict annotation of genome1
-t0 = time.time()
-z_pred = viterbi_log(hmm_7_state_genome2, translate_observations_to_indices(g1["genome1"]))
-t1 = time.time()
-print("Elapsed time for computing the gene structure for genome 1 using the 7-state-genome2 model:", t1-t0)
-pred_ann1_7state = translate_indices_to_path_7state(z_pred)
-
-#Compare prediction accuracy
-true_ann1_7state = read_fasta_file('true-ann1.fa')
-true_ann1_7state = true_ann1_7state['true-ann1']
-print(compute_accuracy(true_ann1_7state, pred_ann1_7state))
-
-
-# 0.7643439116279547
-
-# **Question 8:** What is your accuracy of your prediction on genome 1 using `hmm_3_state_genome2`?
-
-# Your code to get hmm_3_state_genome2 using training by counting on genome 2,
-# predict an annotation of genome 1, and compare the prediction to true-ann1.fa
-
-# Get the training set
-x = translate_observations_to_indices(g2["genome2"])
-z = translate_path_to_indices_3state(true_ann2_3state)
-
-# Get the model
-hmm_3_state_genome2 = training_by_counting(3, 4, x, z)
-
-# Predict annotation of genome1
-t0 = time.time()
-z_pred = viterbi_log(hmm_3_state_genome2, translate_observations_to_indices(g1["genome1"]))
-t1 = time.time()
-print("Elapsed time for computing the gene structure for genome 1 using the 3-state-genome2 model:", t1-t0)
-pred_ann1_3state = translate_indices_to_path_3state(z_pred)
-
-#Compare prediction accuracy
-true_ann1_3state = read_fasta_file('true-ann1.fa')
-true_ann1_3state = true_ann1_3state['true-ann1']
-print(compute_accuracy(true_ann1_3state, pred_ann1_3state))
-
-
-# 0.5920069788997329
-
-# If you have time, you are welcome to redo the above experiments with more HMMs with a more complex transition diagram, e.g. the ones that we considered in the lecture that also models start- and stop-codons. Are you able to improve on the accuracies obtained above?
-
-# **Presentation in class on Dec 6:** Work together in groups of 2-4 students. Prepare a presentation of your answers to the questions 1-8 above that you give in class on Dec 6. It is ok if you do not cover all the questions, but you should make a proper attempt. The presentation constitutes the last mandatory hand in.
+import numpy as np
+np.set_printoptions(precision=5)
+print(hmm_3_state_genome1.init_probs)
+print(np.matrix(hmm_3_state_genome1.trans_probs))
+print(np.matrix(hmm_3_state_genome1.emission_probs))
