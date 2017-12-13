@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Render</title>
+  <meta name="referrer" content="never">
+    <script async="" src="ipynb_data/analytics.js"></script><script src="ipynb_data/ipynb-e71580039d8a38e1c640682118c4d114.js"></script><link rel="stylesheet" href="ipynb_data/ipynb-c47447281494c3bc673c27fa8fa55be4.css">
+
+
+</head>
+<body class="" data-render-url="https://render.githubusercontent.com" data-github-hostname="github.com">
+  <div class="render-shell js-render-shell" data-document-nwo="mailund/ctib" data-document-commit="cfc4e5fa2702ab43aa034126fa07018a60753eb1" data-document-path="Week04/Pairwise_alignments.ipynb" data-file="https://github-render.s3.amazonaws.com/prod/7e46cbd1e195f83341bc2d662320d806-render.html?AWSAccessKeyId=AKIAJILR36AMCOMBK3MQ&amp;Signature=y%2B2lHWDPBQSjFbZaAXyRgw%2BORw4%3D&amp;Expires=1513159664" data-meta="https://github-render.s3.amazonaws.com/prod/7e46cbd1e195f83341bc2d662320d806-meta.json?AWSAccessKeyId=AKIAJILR36AMCOMBK3MQ&amp;Signature=j0VizpnmjfmROf22khPLXPQwt/I%3D&amp;Expires=1513159664">
+    
+
+<div class="render-info">
+  <div class="js-viewer-health render-health is-viewer-good">
+    <span class="symbol">⊖</span>
+    <span class="js-message message">Everything running smoothly!</span>
+  </div>
+</div>
+
+<div id="notebook" class="js-html">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1>Pairwise alignments and edit distance<a class="anchor-link" href="#Pairwise-alignments-and-edit-distance">¶</a>
+</h1>
+<p>A pairwise alignment of two sequences</p>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s1">'ACCATGACC'</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s1">'AGATGAGC'</span>
+</pre></div>
+<p>is a sequence of pairs (columns) containing the letters from the sequences or the special symbol <code>'-'</code>, representing "gaps". The pair <code>('-','-')</code>
+ is not allowed. We do not typically represent the columns directly as 
+pairs, but as one sequence over another, e.g. we would write</p>
+
+<pre><code>ACCATGACC
+AG-ATGAGC</code></pre>
+<p>to represent the alignment</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alignment</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'A'</span><span class="p">,</span><span class="s1">'A'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'C'</span><span class="p">,</span><span class="s1">'G'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'C'</span><span class="p">,</span><span class="s1">'-'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'A'</span><span class="p">,</span><span class="s1">'A'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'T'</span><span class="p">,</span><span class="s1">'T'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'G'</span><span class="p">,</span><span class="s1">'G'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'C'</span><span class="p">,</span><span class="s1">'G'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'C'</span><span class="p">,</span><span class="s1">'C'</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can extract the textual representation of an alignment quite easily:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_alignment</span><span class="p">(</span><span class="n">algn</span><span class="p">):</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">first</span> <span class="k">for</span> <span class="n">first</span><span class="p">,</span><span class="n">second</span> <span class="ow">in</span> <span class="n">algn</span><span class="p">)</span>
+    <span class="n">second</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">second</span> <span class="k">for</span> <span class="n">first</span><span class="p">,</span><span class="n">second</span> <span class="ow">in</span> <span class="n">algn</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">))</span>
+    
+<span class="n">print_alignment</span><span class="p">(</span><span class="n">alignment</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ACCATGCC
+AG-ATGGC
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you stare at this function long enough, you will se that we use to
+ list comprehensions (strictkly speaking generators, but the difference 
+is academic): we get the first elements from the pairs and the second 
+elements from the pairs. We then use the invocation <code>''.join(...)</code> to translate those lists of strings into single strings. The <code>join</code> method is part of what strings can do. Finally, we print the result.</p>
+<p>We can associate a so-called <em>edit distance</em> between the two 
+sequences represented in the alignment. This distance measure counts how
+ many operations were made to change the first sequence into the other 
+(or vice versa). The possible operations are substituting one symbol 
+into another, adding a gap in the first sequence, or adding a gap in the
+ second sequence.</p>
+<p>Given an alignment represented as these pairs, we can count the 
+operations by simply counting the number of pairs where the two symbols 
+do not match. We can implement that idea in very many different ways. 
+Which you would prefer is a matter of taste.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">edit_distance_loop</span><span class="p">(</span><span class="n">algn</span><span class="p">):</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">first</span><span class="p">,</span><span class="n">second</span> <span class="ow">in</span> <span class="n">algn</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">first</span> <span class="o">!=</span> <span class="n">second</span><span class="p">:</span>
+            <span class="n">dist</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">dist</span>
+
+<span class="k">def</span> <span class="nf">edit_distance_sum</span><span class="p">(</span><span class="n">algn</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">first</span><span class="p">,</span><span class="n">second</span> <span class="ow">in</span> <span class="n">algn</span> <span class="k">if</span> <span class="n">first</span> <span class="o">!=</span> <span class="n">second</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">edit_distance_len</span><span class="p">(</span><span class="n">algn</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">first</span><span class="p">,</span><span class="n">second</span> <span class="ow">in</span> <span class="n">algn</span> <span class="k">if</span> <span class="n">first</span> <span class="o">!=</span> <span class="n">second</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"loop: "</span><span class="p">,</span> <span class="n">edit_distance_loop</span><span class="p">(</span><span class="n">alignment</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sum:  "</span><span class="p">,</span> <span class="n">edit_distance_sum</span><span class="p">(</span><span class="n">alignment</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"len:  "</span><span class="p">,</span> <span class="n">edit_distance_len</span><span class="p">(</span><span class="n">alignment</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>loop:  3
+sum:   3
+len:   3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>Constructing alignments<a class="anchor-link" href="#Constructing-alignments">¶</a>
+</h2>
+<p>We are often interested in aligning two sequences, i.e. building an 
+alignment from them, since aligned sequences are informative about 
+homology. Given two sequences, the <em>optimal</em> alignment is the 
+alignment with the smallest distance, in the context of this exercise, 
+the edit distance. Strictly speaking, we will be looking for <em>an</em> optimal alignment--there might be more than one with the same optimal score. We want to find one of these.</p>
+<p>One approach to finding an optimal alignment is to enumerate all 
+possible alignments, compute their score, and pick an optimal one.</p>
+<p>So how do we compute all alignments of two sequences? We can attack this problem recursively.</p>
+<ol>
+<li>If one of the two strings is empty, we need to match the characters in the other with gap characters.</li>
+<li>Otherwise, we need to <ol>
+<li>prepend the pair of the first characters in the two strings to all alignments of the remaining of the strings, </li>
+<li>prepend the pair of the first character of the first string with a 
+gap to all alignments of the first string minus its first character 
+against the second string</li>
+<li>prepend the pair of a gap with the first character of the second 
+string to all alignments of the first string against the second string 
+minus its first character </li>
+</ol>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generate_all_alignments</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">first</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[[(</span><span class="s1">'-'</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">second</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">second</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[[(</span><span class="n">x</span><span class="p">,</span><span class="s1">'-'</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">first</span><span class="p">]]</span>
+
+    <span class="n">match_alignments</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">second</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">+</span> <span class="n">alignment</span> 
+                        <span class="k">for</span> <span class="n">alignment</span> <span class="ow">in</span> <span class="n">generate_all_alignments</span><span class="p">(</span><span class="n">first</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">second</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
+    
+    <span class="n">insertion_alignments</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">'-'</span><span class="p">)]</span> <span class="o">+</span> <span class="n">alignment</span> 
+                            <span class="k">for</span> <span class="n">alignment</span> <span class="ow">in</span> <span class="n">generate_all_alignments</span><span class="p">(</span><span class="n">first</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">second</span><span class="p">)]</span>
+    
+    <span class="n">deletion_alignments</span> <span class="o">=</span> <span class="p">[[(</span><span class="s1">'-'</span><span class="p">,</span><span class="n">second</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">+</span> <span class="n">alignment</span> 
+                           <span class="k">for</span> <span class="n">alignment</span> <span class="ow">in</span> <span class="n">generate_all_alignments</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
+    
+    <span class="k">return</span> <span class="n">match_alignments</span> <span class="o">+</span> <span class="n">insertion_alignments</span> <span class="o">+</span> <span class="n">deletion_alignments</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The basic cases handle when one of the sequences is empty. Notice 
+that we need to have two square brackets around the result we return. We
+ want the function to return a list of lists, so even though we are 
+generating a list of singleton pairs, we need to wrap those pairs in 
+lists, thus the square brackets.</p>
+<p>This function is somewhat inefficient. In the recursive calls, we 
+slice off the first character in one or both of the sequences, which 
+means we need to copy the sequences. A version that use indices into the
+ sequences instead, in the recursive calls, would be more efficient. We 
+also copy lists every time we concatenate them, which we do all the time
+ in this function. Constructing the alignments from the other direction,
+ and using the <code>append</code> method on lists, would also make the 
+function more efficient. We won't worry about the efficiency, however, 
+since generating all possible alignments is not going to be a scalable 
+approach in any case. We will see that shortly. If you want to 
+experiment with the function, though, you can try to make it more 
+efficient.</p>
+<p>For now, let us just see the alignment generation in action:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alignments</span> <span class="o">=</span> <span class="n">generate_all_alignments</span><span class="p">(</span><span class="s1">'ACGGC'</span><span class="p">,</span><span class="s1">'CGGGA'</span><span class="p">)</span>
+
+<span class="n">scored_alignments</span> <span class="o">=</span> <span class="p">[(</span><span class="n">algn</span><span class="p">,</span><span class="n">edit_distance_sum</span><span class="p">(</span><span class="n">algn</span><span class="p">))</span> <span class="k">for</span> <span class="n">algn</span> <span class="ow">in</span> <span class="n">alignments</span><span class="p">]</span>
+<span class="n">optimal_score</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">score</span> <span class="k">for</span> <span class="n">algn</span><span class="p">,</span><span class="n">score</span> <span class="ow">in</span> <span class="n">scored_alignments</span><span class="p">)</span>
+<span class="n">optimal_alignments</span> <span class="o">=</span> <span class="p">[</span><span class="n">algn</span> <span class="k">for</span> <span class="n">algn</span><span class="p">,</span><span class="n">score</span> <span class="ow">in</span> <span class="n">scored_alignments</span> <span class="k">if</span> <span class="n">score</span> <span class="o">==</span> <span class="n">optimal_score</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"There are </span><span class="si">{}</span><span class="s2"> alignments."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alignments</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"There are </span><span class="si">{}</span><span class="s2"> optimal alignments.</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">optimal_alignments</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">alignment</span> <span class="ow">in</span> <span class="n">optimal_alignments</span><span class="p">:</span>
+    <span class="n">print_alignment</span><span class="p">(</span><span class="n">alignment</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"with score </span><span class="si">{}</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">edit_distance_sum</span><span class="p">(</span><span class="n">alignment</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>There are 1683 alignments.
+There are 5 optimal alignments.
+
+ACGGC
+CGGGA
+with score 3
+
+ACGGC-
+-CGGGA
+with score 3
+
+ACGG-C
+-CGGGA
+with score 3
+
+ACG-GC
+-CGGGA
+with score 3
+
+AC-GGC
+-CGGGA
+with score 3
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To see that this is not a viable solution to finding an optimal 
+alignment, we can explore how many alignments there are for sequences of
+ length <img class="math math-inline" alt="$n$" src="ipynb_data/math.svg"> and <img class="math math-inline" alt="$m$" src="ipynb_data/math_024.svg">.
+ The alignment scores--the edit distance between two sequences--depends 
+on the actual sequences, but the number of possible alignments do not. 
+We can compute the number of alignments, <img class="math math-inline" alt="$N(n,m)$" src="ipynb_data/math_014.svg">, with a recursion very simpliar to the one we used to generate alignments--not surprisingly.</p>
+<img class="math math-display" alt="$$N(n,m) = \begin{cases}
+1 &amp;amp; n = 0 \lor m = 0 \\
+N(n-1,m-1) + N(n-1,m) + N(n,m-1) &amp;amp; \mathrm{otherwise}
+\end{cases}
+$$" src="ipynb_data/math_007.svg">
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">N</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">N</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="n">N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">N</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s2">"ACGGC"</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="s2">"CGGGA"</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1683</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The number of alignments must grow as <img class="math math-inline" alt="$\Omega(3^n)$" src="ipynb_data/math_012.svg">,
+ considering that for each non-base case we have at least three 
+alignment-lists, but some experiments show that it is substantially 
+worse than this rough lower bound:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$3^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$4^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="n">N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$N(n,n)$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$5^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.legend.Legend at 0x1126b7c88&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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%0A">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">,</span> <span class="n">nonposy</span><span class="o">=</span><span class="s1">'clip'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$3^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$4^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="n">N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$N(n,n)$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$5^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.legend.Legend at 0x112930b38&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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%0Abu7/AIGR/08SbSexAAAAAElFTkSuQmCC%0A">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>Dynamic programming<a class="anchor-link" href="#Dynamic-programming">¶</a>
+</h2>
+<p>If you try to extend the graph above much higher than <img class="math math-inline" alt="$n=10$" src="ipynb_data/math_016.svg"> you will soon loose patience waiting for the <img class="math math-inline" alt="$N(n,n)$" src="ipynb_data/math_017.svg"> computations to finish. This is not surprising, considering that to compute <img class="math math-inline" alt="$N(n,n)$" src="ipynb_data/math_017.svg"> you actually have to run through <img class="math math-inline" alt="$N(n,n)$" src="ipynb_data/math_017.svg"> recursions. Most of the computations, however, are of the same pairs of numbers, <img class="math math-inline" alt="$N(m,k)$" src="ipynb_data/math_018.svg">. This is a problem that will be much more efficient to solve using <em>dynamic programming</em>.</p>
+<p>With dynamic programming, we build a table to store the value of 
+computations in, so we do not need to computing them more than once. 
+There are two approaches to dynamic programming. We can use a recursion,
+ as above, but check if a value is already known before we call 
+recursively. This approach is also known as <em>memorisation</em>. 
+Alternatively, we can make sure that all the values we need are known 
+when we need them by turning the computation on its head and build 
+values up from the base cases up to the value we are interested in.</p>
+<p>We can try implementing both approaches. For memorisation, we need a 
+table and a way to indicate that we haven't computed a value yet. Since 
+we are counting the number of alignments, and this cannot be a negative 
+number, we will use <code>-1</code> to indicate this. We can use the <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.empty.html"><code>numpy.empty</code></a> function to create an empty table. It will not initialize values (for that, you might want to look at the <code>zeros</code> function, for example), but that is fine. We will put missing values in all entries anyway.</p>
+<p>Now, normally we would need to write loops to run through all cells 
+in a table and assign the mising value to them, but tables from numpy 
+have a special syntax for this (see the code below that says <code>table[:,:] = MISSING</code>).
+ We won't be exploring numpy as more than tables in this class, though, 
+so just think of this as two nested loops through the cells of the 
+table.</p>
+<p>I have split the implementation into three functions. One for making the table--we will need to look up values at cell <img class="math math-inline" alt="$(n,m)$" src="ipynb_data/math_027.svg"> so we need to allocate rows and columns one larger, <img class="math math-inline" alt="$(n+1,m+1)$" src="ipynb_data/math_019.svg">--a
+ second function for the recursive calls that use the table so it only 
+computes values that are missing but otherwise just return the memorized
+ values--and a final function that allocates the table and then starts 
+the recursion.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">MISSING</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">make_missing_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">table</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="n">MISSING</span>
+    <span class="k">return</span> <span class="n">table</span>
+
+<span class="k">def</span> <span class="nf">memorize_helper</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">table</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">MISSING</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">table</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">table</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">memorize_helper</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> \
+                         <span class="n">memorize_helper</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> \
+                         <span class="n">memorize_helper</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">table</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">memorize_N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">make_missing_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">memorize_helper</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To test the new implementation, we can compare results with the previous, simpler, implementation:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"N(</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">) == </span><span class="si">{}</span><span class="s2">, memorize_N(</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">) == </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">memorize_N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>N(1,1) == 3, memorize_N(1,1) == 3
+N(1,2) == 5, memorize_N(1,2) == 5
+N(1,3) == 7, memorize_N(1,3) == 7
+N(1,4) == 9, memorize_N(1,4) == 9
+N(2,1) == 5, memorize_N(2,1) == 5
+N(2,2) == 13, memorize_N(2,2) == 13
+N(2,3) == 25, memorize_N(2,3) == 25
+N(2,4) == 41, memorize_N(2,4) == 41
+N(3,1) == 7, memorize_N(3,1) == 7
+N(3,2) == 25, memorize_N(3,2) == 25
+N(3,3) == 63, memorize_N(3,3) == 63
+N(3,4) == 129, memorize_N(3,4) == 129
+N(4,1) == 9, memorize_N(4,1) == 9
+N(4,2) == 41, memorize_N(4,2) == 41
+N(4,3) == 129, memorize_N(4,3) == 129
+N(4,4) == 321, memorize_N(4,4) == 321
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Memorisation is mostly used when we do not know, <em>a priori</em>, 
+which recursive calls we will need, or in which order we will need them.
+ Checking for missing-ness and implementing the computations as 
+recursions add some overhead, however, compared to the more traditional 
+dynamic programming approach where we compute all values we will need 
+before we need them.</p>
+<p>In these computations we know that we will need all values <img class="math math-inline" alt="$N(i,j)$" src="ipynb_data/math_023.svg"> for <img class="math math-inline" alt="$0 \leq i \leq n, 0 \leq j \leq m$" src="ipynb_data/math_026.svg">, so we can compute them in increasing over of <img class="math math-inline" alt="$i$" src="ipynb_data/math_011.svg"> and <img class="math math-inline" alt="$j$" src="ipynb_data/math_002.svg">.
+ Doing so, we will always have what we need when we need it. We fill out
+ the first row and column of the table using the base case rules, and 
+after that simply iterate through the rest of the table cells:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">make_empty_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dynprog_N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">make_empty_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">table</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"N(</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">) == </span><span class="si">{}</span><span class="s2">, dynprog_N(</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">) == </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">dynprog_N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>N(1,1) == 3, dynprog_N(1,1) == 3
+N(1,2) == 5, dynprog_N(1,2) == 5
+N(1,3) == 7, dynprog_N(1,3) == 7
+N(1,4) == 9, dynprog_N(1,4) == 9
+N(2,1) == 5, dynprog_N(2,1) == 5
+N(2,2) == 13, dynprog_N(2,2) == 13
+N(2,3) == 25, dynprog_N(2,3) == 25
+N(2,4) == 41, dynprog_N(2,4) == 41
+N(3,1) == 7, dynprog_N(3,1) == 7
+N(3,2) == 25, dynprog_N(3,2) == 25
+N(3,3) == 63, dynprog_N(3,3) == 63
+N(3,4) == 129, dynprog_N(3,4) == 129
+N(4,1) == 9, dynprog_N(4,1) == 9
+N(4,2) == 41, dynprog_N(4,2) == 41
+N(4,3) == 129, dynprog_N(4,3) == 129
+N(4,4) == 321, dynprog_N(4,4) == 321
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The three functions for computing the number of alignments compute 
+the same values, but with dramatically different running times and with 
+the dynamic programming approach being the fastest.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">N</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">memorize_N</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">dynprog_N</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>580 µs ± 4.24 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+57.1 µs ± 1.37 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+24 µs ± 600 ns per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">,</span> <span class="n">nonposy</span><span class="o">=</span><span class="s1">'clip'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$4^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="n">dynprog_N</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$N(n,n)$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$5^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"$6^n$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.legend.Legend at 0x112be8f60&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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%0ABwAAAABJRU5ErkJggg==%0A">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With dynamic programming, we have made the <img class="math math-inline" alt="$N(n,m)$" src="ipynb_data/math_014.svg"> computation much faster. We cannot move much beyond <img class="math math-inline" alt="$n=m=20$" src="ipynb_data/math_020.svg">,
+ though, because we will run into overflow; there is a limit to how 
+large numbers we can store in numpy arrays. (Python can represent 
+arbitrarily large integers but numpy cannot).</p>
+<h2>Computing the optimal edit distance<a class="anchor-link" href="#Computing-the-optimal-edit-distance">¶</a>
+</h2>
+<p>We have seen how to compute the edit distance for a given alignment, 
+but what about computing the minimal edit distance between two 
+sequences? That is, computing the minimal distance over all possible 
+alignments?</p>
+<p>Considering how many alignments there are, it is a no-go to enumerate
+ them all to compute this distance. We can, however, be inspired by the 
+recursion for computing the number of alignments and use something 
+similar to compute the edit distance, <img class="math math-inline" alt="$D(x,y)$" src="ipynb_data/math_009.svg">.</p>
+<p>The basic cases are similar to the counting recursion, <img class="math math-inline" alt="$N(n,m)$" src="ipynb_data/math_014.svg">,
+ except that we are not counting that there is a single alignment 
+possible, but rather that the cost of that alignment is the length of 
+the non-empty string</p>
+<img class="math math-display" alt="$$D(x,&quot;&quot;) = |x|$$$$D(&quot;&quot;,y) = |y|$$" src="ipynb_data/math_022.svg"><p>For the recursive case, we need to consider the same three recursive calls as for the <img class="math math-inline" alt="$N$" src="ipynb_data/math_010.svg">
+ function, but instead of adding numbers together we want to take the 
+minimum since we are looking for the minimal edit cost in an alignment. 
+The cost of the <em>match</em> case depends on whether the two 
+characters we try to match are equal or different, if equal the extra 
+cost is zero while it is one otherwise, while the gap cases always 
+increase the cost by one.</p>
+<img class="math math-display" alt="$$D(x,y) = \min\left\{\mathbf{1}_{x_1\neq y_1} + D(x_{2\ldots n}, y_{2\ldots m}),
+                      1 + D(x_{2\ldots n}, y),
+                      1 + D(x, y_{2\ldots m})
+               \right\}$$" src="ipynb_data/math_021.svg"><p>Here, I've used the notation <img class="math math-inline" alt="$\mathbf{1}_{x_1\neq y_1}$" src="ipynb_data/math_006.svg">
+ to denote a function that is 1 if the two characters are equal and zero
+ otherwise. The notation is similar to indicator variables in 
+statistics.</p>
+<p>As written here, the recursion starts from the left and moves from zero indices up to the length of <img class="math math-inline" alt="$x$" src="ipynb_data/math_003.svg"> and <img class="math math-inline" alt="$y$" src="ipynb_data/math_008.svg">, respectively. We can modify it to run from the end of the strings, indices <img class="math math-inline" alt="$n$" src="ipynb_data/math.svg"> and <img class="math math-inline" alt="$m$" src="ipynb_data/math_024.svg">, to make it look even more like the <img class="math math-inline" alt="$N(n,m)$" src="ipynb_data/math_014.svg"> function. If we do this, we get</p>
+<img class="math math-display" alt="$$D(n,m) = \begin{cases}
+n &amp;amp; m = 0 \\
+m &amp;amp; n = 0 \\
+\min\left\{\mathbf{1}_{x_{n-1}\neq y_{m-1}} + D(n-1,m-1), 1 + D(n-1,m), 1 + D(n,m)\right\}
+\end{cases}$$" src="ipynb_data/math_025.svg"><p>In the recursive case, 
+we need to subtract one from the indices when comparing the last 
+elements in the strings. This is simply a consequences of indexing from 
+zero; the last elements are the lengths minus one.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">D_helper</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">m</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">D_helper</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+                <span class="mi">1</span> <span class="o">+</span> <span class="n">D_helper</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span>
+                <span class="mi">1</span> <span class="o">+</span> <span class="n">D_helper</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    
+<span class="k">def</span> <span class="nf">D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">D_helper</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The dynamic programming variant is also similar to the version we wrote for the counting function:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dynprog_D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">make_empty_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+        
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                              <span class="mi">1</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span>
+                              <span class="mi">1</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">table</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see how the dynamic programming approach works with a few figues.</p>
+<p>At the beginning of the algorithm, we fill out the first row and the first column.</p>
+<p><img src="ipynb_data/dynprog-empty-alignment.png" alt="Initial table"></p>
+<p>The upper left corner represent the empty sequence aligned to the 
+empty sequence. The first row, the empty sequence aligned to prefixes of
+ the second string, and the first column captures prefixes of the first 
+sequence aligned to the empty string.</p>
+<p><img src="ipynb_data/dynprog-edge-cases.png" alt=""></p>
+<p>The first step in the nested loops will fill out the first non-edge 
+case, which is either a match case, of "A" against "A", or an insertion 
+or a deletion. Of these choices, the lowest cost is the match.</p>
+<p><img src="ipynb_data/dynprog-first-non-edge-case.png" alt=""></p>
+<p>The rest of the table is simply filled out in the same way.</p>
+<p><img src="ipynb_data/dynprog-complete.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To test these functions, we can compare their results with what we 
+would get by exchausively computing all alignments and then picking the 
+best scoring one.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exchaustive_D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">alignments</span> <span class="o">=</span> <span class="n">generate_all_alignments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">edit_distance_sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alignments</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sequences</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'AACAC'</span><span class="p">,</span> <span class="s1">'CAAAG'</span><span class="p">,</span> <span class="s1">'ACA'</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">,</span> <span class="s1">'GGGGG'</span><span class="p">,</span> <span class="s1">'AAAAAAAA'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sequences</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">sequences</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">sequences</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> vs </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="n">dynprog_D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="n">exchaustive_D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CAAAG vs AACAC, 3, 3, 3
+ACA vs AACAC, 2, 2, 2
+ACA vs CAAAG, 3, 3, 3
+A vs AACAC, 4, 4, 4
+A vs CAAAG, 4, 4, 4
+A vs ACA, 2, 2, 2
+GGGGG vs AACAC, 5, 5, 5
+GGGGG vs CAAAG, 4, 4, 4
+GGGGG vs ACA, 5, 5, 5
+GGGGG vs A, 5, 5, 5
+AAAAAAAA vs AACAC, 5, 5, 5
+AAAAAAAA vs CAAAG, 5, 5, 5
+AAAAAAAA vs ACA, 6, 6, 6
+AAAAAAAA vs A, 7, 7, 7
+AAAAAAAA vs GGGGG, 8, 8, 8
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The three functions compute the same value, but, as was the case for <img class="math math-inline" alt="$N(n,m)$" src="ipynb_data/math_014.svg">, the dynamic programming algorithm is much more efficient.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">'GGGGG'</span><span class="p">,</span> <span class="s1">'AAAAAAAA'</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">exchaustive_D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">dynprog_D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>77.9 ms ± 2.41 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+5.85 ms ± 11.4 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+105 µs ± 1.12 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>Backtracking<a class="anchor-link" href="#Backtracking">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Of course, knowing what the score for an optimal alignment is doesn't actually tell us what that <em>alignment</em> is. We can, however, work that out from the table we fill out in the dynamic programming function.</p>
+<p>If we are at the cell <img class="math math-inline" alt="$(i,j)$" src="ipynb_data/math_005.svg"> for <img class="math math-inline" alt="$i,j&amp;gt;0$" src="ipynb_data/math_013.svg">, the cost at this cell must have been calculated from one of the three cells <img class="math math-inline" alt="$(i-1,j-1)$" src="ipynb_data/math_028.svg">, <img class="math math-inline" alt="$(i-1,j)$" src="ipynb_data/math_004.svg"> or <img class="math math-inline" alt="$(i,j-1)$" src="ipynb_data/math_015.svg">.
+ We can figure out which one. When we have figured that out, we can in 
+principle solve the recursive problem of finding the optimal alignment 
+for that cell and then just append the alignment pair that match the 
+transition from that cell to the current.</p>
+<p>For that recursive function to work, we just need to handle the base cases. Those are the cases where either <img class="math math-inline" alt="$i$" src="ipynb_data/math_011.svg"> or <img class="math math-inline" alt="$j$" src="ipynb_data/math_002.svg"> are empty. For those, we just need to construct pairs that match the characters in the non-empty string.</p>
+<p>We can put all this together in a function that constructs a pairwise
+ alignment. We split it into two helper functions, one for filling the 
+dynamic programming table and one for backtracking. The full alignment 
+code looks like this:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">construct_table</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">make_empty_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+        
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                              <span class="mi">1</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span>
+                              <span class="mi">1</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">table</span>
+
+<span class="k">def</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="s1">'-'</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="s1">'-'</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
+    
+    <span class="k">if</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">alignment</span> <span class="o">=</span> <span class="n">backtrack</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">alignment</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        
+    <span class="k">elif</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span>
+        <span class="n">alignment</span> <span class="o">=</span> <span class="n">backtrack</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="n">alignment</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="s1">'-'</span><span class="p">))</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">alignment</span> <span class="o">=</span> <span class="n">backtrack</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">alignment</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">'-'</span><span class="p">,</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        
+    <span class="k">return</span> <span class="n">alignment</span>
+
+<span class="k">def</span> <span class="nf">pairwise_alignment</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">construct_table</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">backtrack</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let us see it in practise!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">pairwise_alignment</span><span class="p">(</span><span class="s1">'AACGC'</span><span class="p">,</span> <span class="s1">'AACC'</span><span class="p">)</span>
+<span class="n">print_alignment</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>AACGC
+AAC-C
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So, there you have it. The dynamic programming algorithm for constructing optimal pairwise alignments.</p>
+
+</div>
+</div>
+</div>
+ 
+
+</div>
+
+  </div>
+
+  
+
+
+
+</body></html>

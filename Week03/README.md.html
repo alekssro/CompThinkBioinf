@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <title>README</title>
+      <style>.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); overflow: auto; }
+.markdown-preview:not([data-use-github-style]) > :first-child { margin-top: 0px; }
+.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) h1 { font-size: 2.4em; font-weight: 300; }
+.markdown-preview:not([data-use-github-style]) h2 { font-size: 1.8em; font-weight: 400; }
+.markdown-preview:not([data-use-github-style]) h3 { font-size: 1.5em; font-weight: 500; }
+.markdown-preview:not([data-use-github-style]) h4 { font-size: 1.2em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h5 { font-size: 1.1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h6 { font-size: 1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) strong { color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) del { color: rgb(124, 135, 156); }
+.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(82, 139, 255); }
+.markdown-preview:not([data-use-github-style]) img { max-width: 100%; }
+.markdown-preview:not([data-use-github-style]) > p { margin-top: 0px; margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) > ul, .markdown-preview:not([data-use-github-style]) > ol { margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(124, 135, 156); border-color: rgb(75, 83, 98); border-width: 4px; }
+.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top: 2px dashed rgb(75, 83, 98); background: none; }
+.markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
+.markdown-preview:not([data-use-github-style]) th { color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(75, 83, 98); }
+.markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(58, 63, 75); }
+.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(49, 54, 63); }
+.markdown-preview:not([data-use-github-style]) kbd { color: rgb(255, 255, 255); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(75, 83, 98) rgb(75, 83, 98) rgb(62, 68, 81); border-image: initial; background-color: rgb(58, 63, 75); }
+.markdown-preview[data-use-github-style] { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); overflow: scroll; }
+.markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
+.markdown-preview[data-use-github-style] > :last-child { margin-bottom: 0px !important; }
+.markdown-preview[data-use-github-style] a:not([href]) { color: inherit; text-decoration: none; }
+.markdown-preview[data-use-github-style] .absent { color: rgb(204, 0, 0); }
+.markdown-preview[data-use-github-style] .anchor { position: absolute; top: 0px; left: 0px; display: block; padding-right: 6px; padding-left: 30px; margin-left: -30px; }
+.markdown-preview[data-use-github-style] .anchor:focus { outline: none; }
+.markdown-preview[data-use-github-style] h1, .markdown-preview[data-use-github-style] h2, .markdown-preview[data-use-github-style] h3, .markdown-preview[data-use-github-style] h4, .markdown-preview[data-use-github-style] h5, .markdown-preview[data-use-github-style] h6 { position: relative; margin-top: 1em; margin-bottom: 16px; font-weight: bold; line-height: 1.4; }
+.markdown-preview[data-use-github-style] h1 .octicon-link, .markdown-preview[data-use-github-style] h2 .octicon-link, .markdown-preview[data-use-github-style] h3 .octicon-link, .markdown-preview[data-use-github-style] h4 .octicon-link, .markdown-preview[data-use-github-style] h5 .octicon-link, .markdown-preview[data-use-github-style] h6 .octicon-link { display: none; color: rgb(0, 0, 0); vertical-align: middle; }
+.markdown-preview[data-use-github-style] h1:hover .anchor, .markdown-preview[data-use-github-style] h2:hover .anchor, .markdown-preview[data-use-github-style] h3:hover .anchor, .markdown-preview[data-use-github-style] h4:hover .anchor, .markdown-preview[data-use-github-style] h5:hover .anchor, .markdown-preview[data-use-github-style] h6:hover .anchor { padding-left: 8px; margin-left: -30px; text-decoration: none; }
+.markdown-preview[data-use-github-style] h1:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h2:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h3:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h4:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h5:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h6:hover .anchor .octicon-link { display: inline-block; }
+.markdown-preview[data-use-github-style] h1 tt, .markdown-preview[data-use-github-style] h2 tt, .markdown-preview[data-use-github-style] h3 tt, .markdown-preview[data-use-github-style] h4 tt, .markdown-preview[data-use-github-style] h5 tt, .markdown-preview[data-use-github-style] h6 tt, .markdown-preview[data-use-github-style] h1 code, .markdown-preview[data-use-github-style] h2 code, .markdown-preview[data-use-github-style] h3 code, .markdown-preview[data-use-github-style] h4 code, .markdown-preview[data-use-github-style] h5 code, .markdown-preview[data-use-github-style] h6 code { font-size: inherit; }
+.markdown-preview[data-use-github-style] h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h1 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h2 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h3 { font-size: 1.5em; line-height: 1.43; }
+.markdown-preview[data-use-github-style] h3 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h4 { font-size: 1.25em; }
+.markdown-preview[data-use-github-style] h4 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h5 { font-size: 1em; }
+.markdown-preview[data-use-github-style] h5 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] h6 { font-size: 1em; color: rgb(119, 119, 119); }
+.markdown-preview[data-use-github-style] h6 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] p, .markdown-preview[data-use-github-style] blockquote, .markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol, .markdown-preview[data-use-github-style] dl, .markdown-preview[data-use-github-style] table, .markdown-preview[data-use-github-style] pre { margin-top: 0px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] hr { height: 4px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border: 0px none; }
+.markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol { padding-left: 2em; }
+.markdown-preview[data-use-github-style] ul.no-list, .markdown-preview[data-use-github-style] ol.no-list { padding: 0px; list-style-type: none; }
+.markdown-preview[data-use-github-style] ul ul, .markdown-preview[data-use-github-style] ul ol, .markdown-preview[data-use-github-style] ol ol, .markdown-preview[data-use-github-style] ol ul { margin-top: 0px; margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] li > p { margin-top: 16px; }
+.markdown-preview[data-use-github-style] dl { padding: 0px; }
+.markdown-preview[data-use-github-style] dl dt { padding: 0px; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: bold; }
+.markdown-preview[data-use-github-style] dl dd { padding: 0px 16px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] blockquote { padding: 0px 15px; color: rgb(119, 119, 119); border-left: 4px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] blockquote > :first-child { margin-top: 0px; }
+.markdown-preview[data-use-github-style] blockquote > :last-child { margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] table { display: block; width: 100%; overflow: auto; word-break: keep-all; }
+.markdown-preview[data-use-github-style] table th { font-weight: bold; }
+.markdown-preview[data-use-github-style] table th, .markdown-preview[data-use-github-style] table td { padding: 6px 13px; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] table tr { background-color: rgb(255, 255, 255); border-top: 1px solid rgb(204, 204, 204); }
+.markdown-preview[data-use-github-style] table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+.markdown-preview[data-use-github-style] img { max-width: 100%; box-sizing: border-box; }
+.markdown-preview[data-use-github-style] .emoji { max-width: none; }
+.markdown-preview[data-use-github-style] span.frame { display: block; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.frame > span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0px 0px; overflow: hidden; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] span.frame span img { display: block; float: left; }
+.markdown-preview[data-use-github-style] span.frame span span { display: block; padding: 5px 0px 0px; clear: both; color: rgb(51, 51, 51); }
+.markdown-preview[data-use-github-style] span.align-center { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-center > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-center span img { margin: 0px auto; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-right { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-right > span { display: block; margin: 13px 0px 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] span.align-right span img { margin: 0px; text-align: right; }
+.markdown-preview[data-use-github-style] span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-left span { margin: 13px 0px 0px; }
+.markdown-preview[data-use-github-style] span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-right > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] code, .markdown-preview[data-use-github-style] tt { padding: 0.2em 0px; margin: 0px; font-size: 85%; background-color: rgba(0, 0, 0, 0.0392157); border-radius: 3px; }
+.markdown-preview[data-use-github-style] code::before, .markdown-preview[data-use-github-style] tt::before, .markdown-preview[data-use-github-style] code::after, .markdown-preview[data-use-github-style] tt::after { letter-spacing: -0.2em; content: " "; }
+.markdown-preview[data-use-github-style] code br, .markdown-preview[data-use-github-style] tt br { display: none; }
+.markdown-preview[data-use-github-style] del code { text-decoration: inherit; }
+.markdown-preview[data-use-github-style] pre > code { padding: 0px; margin: 0px; font-size: 100%; word-break: normal; white-space: pre; background: transparent; border: 0px; }
+.markdown-preview[data-use-github-style] .highlight { margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] .highlight pre, .markdown-preview[data-use-github-style] pre { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border-radius: 3px; }
+.markdown-preview[data-use-github-style] .highlight pre { margin-bottom: 0px; word-break: normal; }
+.markdown-preview[data-use-github-style] pre { word-wrap: normal; }
+.markdown-preview[data-use-github-style] pre code, .markdown-preview[data-use-github-style] pre tt { display: inline; max-width: initial; padding: 0px; margin: 0px; overflow: initial; line-height: inherit; word-wrap: normal; background-color: transparent; border: 0px; }
+.markdown-preview[data-use-github-style] pre code::before, .markdown-preview[data-use-github-style] pre tt::before, .markdown-preview[data-use-github-style] pre code::after, .markdown-preview[data-use-github-style] pre tt::after { content: normal; }
+.markdown-preview[data-use-github-style] kbd { display: inline-block; padding: 3px 5px; font-size: 11px; line-height: 10px; color: rgb(85, 85, 85); vertical-align: middle; background-color: rgb(252, 252, 252); border-width: 1px; border-style: solid; border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(187, 187, 187); border-image: initial; border-radius: 3px; box-shadow: rgb(187, 187, 187) 0px -1px 0px inset; }
+.markdown-preview[data-use-github-style] a { color: rgb(51, 122, 183); }
+.markdown-preview[data-use-github-style] code { color: inherit; }
+.markdown-preview[data-use-github-style] pre.editor-colors { padding: 0.8em 1em; margin-bottom: 1em; font-size: 0.85em; border-radius: 4px; overflow: auto; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors .horizontal-scrollbar { visibility: hidden; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors:hover .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors:hover .horizontal-scrollbar { visibility: visible; }
+.markdown-preview .task-list-item-checkbox { position: absolute; margin: 0.25em 0px 0px -1.4em; }
+.bracket-matcher .region {
+  border-bottom: 1px dotted lime;
+  position: absolute;
+}
+.line-number.bracket-matcher {
+  background-color: #777;
+}
+
+.spell-check-misspelling .region {
+  border-bottom: 2px dotted rgba(255, 51, 51, 0.75);
+}
+.spell-check-corrections {
+  width: 25em !important;
+}
+
+pre.editor-colors {
+  background-color: #282c34;
+  color: #abb2bf;
+}
+pre.editor-colors .line.cursor-line {
+  background-color: rgba(153, 187, 255, 0.04);
+}
+pre.editor-colors .invisible {
+  color: #abb2bf;
+}
+pre.editor-colors .cursor {
+  border-left: 2px solid #528bff;
+}
+pre.editor-colors .selection .region {
+  background-color: #3e4451;
+}
+pre.editor-colors .bracket-matcher .region {
+  border-bottom: 1px solid #528bff;
+  box-sizing: border-box;
+}
+pre.editor-colors .invisible-character {
+  color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .indent-guide {
+  color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .wrap-guide {
+  background-color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .find-result .region.region.region,
+pre.editor-colors .current-result .region.region.region {
+  border-radius: 2px;
+  background-color: rgba(82, 139, 255, 0.24);
+  transition: border-color 0.4s;
+}
+pre.editor-colors .find-result .region.region.region {
+  border: 2px solid transparent;
+}
+pre.editor-colors .current-result .region.region.region {
+  border: 2px solid #528bff;
+  transition-duration: .1s;
+}
+pre.editor-colors .gutter .line-number {
+  color: #636d83;
+  -webkit-font-smoothing: antialiased;
+}
+pre.editor-colors .gutter .line-number.cursor-line {
+  color: #abb2bf;
+  background-color: #2c313a;
+}
+pre.editor-colors .gutter .line-number.cursor-line-no-selection {
+  background-color: transparent;
+}
+pre.editor-colors .gutter .line-number .icon-right {
+  color: #abb2bf;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before {
+  bottom: -3px;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 25px;
+  border-bottom: 1px dotted rgba(224, 82, 82, 0.5);
+  pointer-events: none;
+}
+pre.editor-colors .gutter .line-number.folded,
+pre.editor-colors .gutter .line-number:after,
+pre.editor-colors .fold-marker:after {
+  color: #abb2bf;
+}
+.syntax--comment {
+  color: #5c6370;
+  font-style: italic;
+}
+.syntax--comment .syntax--markup.syntax--link {
+  color: #5c6370;
+}
+.syntax--entity.syntax--name.syntax--type {
+  color: #e5c07b;
+}
+.syntax--entity.syntax--other.syntax--inherited-class {
+  color: #98c379;
+}
+.syntax--keyword {
+  color: #c678dd;
+}
+.syntax--keyword.syntax--control {
+  color: #c678dd;
+}
+.syntax--keyword.syntax--operator {
+  color: #abb2bf;
+}
+.syntax--keyword.syntax--other.syntax--special-method {
+  color: #61afef;
+}
+.syntax--keyword.syntax--other.syntax--unit {
+  color: #d19a66;
+}
+.syntax--storage {
+  color: #c678dd;
+}
+.syntax--storage.syntax--type.syntax--annotation,
+.syntax--storage.syntax--type.syntax--primitive {
+  color: #c678dd;
+}
+.syntax--storage.syntax--modifier.syntax--package,
+.syntax--storage.syntax--modifier.syntax--import {
+  color: #abb2bf;
+}
+.syntax--constant {
+  color: #d19a66;
+}
+.syntax--constant.syntax--variable {
+  color: #d19a66;
+}
+.syntax--constant.syntax--character.syntax--escape {
+  color: #56b6c2;
+}
+.syntax--constant.syntax--numeric {
+  color: #d19a66;
+}
+.syntax--constant.syntax--other.syntax--color {
+  color: #56b6c2;
+}
+.syntax--constant.syntax--other.syntax--symbol {
+  color: #56b6c2;
+}
+.syntax--variable {
+  color: #e06c75;
+}
+.syntax--variable.syntax--interpolation {
+  color: #be5046;
+}
+.syntax--variable.syntax--parameter {
+  color: #abb2bf;
+}
+.syntax--string {
+  color: #98c379;
+}
+.syntax--string.syntax--regexp {
+  color: #56b6c2;
+}
+.syntax--string.syntax--regexp .syntax--source.syntax--ruby.syntax--embedded {
+  color: #e5c07b;
+}
+.syntax--string.syntax--other.syntax--link {
+  color: #e06c75;
+}
+.syntax--punctuation.syntax--definition.syntax--comment {
+  color: #5c6370;
+}
+.syntax--punctuation.syntax--definition.syntax--method-parameters,
+.syntax--punctuation.syntax--definition.syntax--function-parameters,
+.syntax--punctuation.syntax--definition.syntax--parameters,
+.syntax--punctuation.syntax--definition.syntax--separator,
+.syntax--punctuation.syntax--definition.syntax--seperator,
+.syntax--punctuation.syntax--definition.syntax--array {
+  color: #abb2bf;
+}
+.syntax--punctuation.syntax--definition.syntax--heading,
+.syntax--punctuation.syntax--definition.syntax--identity {
+  color: #61afef;
+}
+.syntax--punctuation.syntax--definition.syntax--bold {
+  color: #e5c07b;
+  font-weight: bold;
+}
+.syntax--punctuation.syntax--definition.syntax--italic {
+  color: #c678dd;
+  font-style: italic;
+}
+.syntax--punctuation.syntax--section.syntax--embedded {
+  color: #be5046;
+}
+.syntax--punctuation.syntax--section.syntax--method,
+.syntax--punctuation.syntax--section.syntax--class,
+.syntax--punctuation.syntax--section.syntax--inner-class {
+  color: #abb2bf;
+}
+.syntax--support.syntax--class {
+  color: #e5c07b;
+}
+.syntax--support.syntax--type {
+  color: #56b6c2;
+}
+.syntax--support.syntax--function {
+  color: #56b6c2;
+}
+.syntax--support.syntax--function.syntax--any-method {
+  color: #61afef;
+}
+.syntax--entity.syntax--name.syntax--function {
+  color: #61afef;
+}
+.syntax--entity.syntax--name.syntax--class,
+.syntax--entity.syntax--name.syntax--type.syntax--class {
+  color: #e5c07b;
+}
+.syntax--entity.syntax--name.syntax--section {
+  color: #61afef;
+}
+.syntax--entity.syntax--name.syntax--tag {
+  color: #e06c75;
+}
+.syntax--entity.syntax--other.syntax--attribute-name {
+  color: #d19a66;
+}
+.syntax--entity.syntax--other.syntax--attribute-name.syntax--id {
+  color: #61afef;
+}
+.syntax--meta.syntax--class {
+  color: #e5c07b;
+}
+.syntax--meta.syntax--class.syntax--body {
+  color: #abb2bf;
+}
+.syntax--meta.syntax--method-call,
+.syntax--meta.syntax--method {
+  color: #abb2bf;
+}
+.syntax--meta.syntax--definition.syntax--variable {
+  color: #e06c75;
+}
+.syntax--meta.syntax--link {
+  color: #d19a66;
+}
+.syntax--meta.syntax--require {
+  color: #61afef;
+}
+.syntax--meta.syntax--selector {
+  color: #c678dd;
+}
+.syntax--meta.syntax--separator {
+  background-color: #373b41;
+  color: #abb2bf;
+}
+.syntax--meta.syntax--tag {
+  color: #abb2bf;
+}
+.syntax--underline {
+  text-decoration: underline;
+}
+.syntax--none {
+  color: #abb2bf;
+}
+.syntax--invalid.syntax--deprecated {
+  color: #523d14 !important;
+  background-color: #e0c285 !important;
+}
+.syntax--invalid.syntax--illegal {
+  color: white !important;
+  background-color: #e05252 !important;
+}
+.syntax--markup.syntax--bold {
+  color: #d19a66;
+  font-weight: bold;
+}
+.syntax--markup.syntax--changed {
+  color: #c678dd;
+}
+.syntax--markup.syntax--deleted {
+  color: #e06c75;
+}
+.syntax--markup.syntax--italic {
+  color: #c678dd;
+  font-style: italic;
+}
+.syntax--markup.syntax--heading {
+  color: #e06c75;
+}
+.syntax--markup.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
+  color: #61afef;
+}
+.syntax--markup.syntax--link {
+  color: #56b6c2;
+}
+.syntax--markup.syntax--inserted {
+  color: #98c379;
+}
+.syntax--markup.syntax--quote {
+  color: #d19a66;
+}
+.syntax--markup.syntax--raw {
+  color: #98c379;
+}
+.syntax--source.syntax--c .syntax--keyword.syntax--operator {
+  color: #c678dd;
+}
+.syntax--source.syntax--cpp .syntax--keyword.syntax--operator {
+  color: #c678dd;
+}
+.syntax--source.syntax--cs .syntax--keyword.syntax--operator {
+  color: #c678dd;
+}
+.syntax--source.syntax--css .syntax--property-name,
+.syntax--source.syntax--css .syntax--property-value {
+  color: #828997;
+}
+.syntax--source.syntax--css .syntax--property-name.syntax--support,
+.syntax--source.syntax--css .syntax--property-value.syntax--support {
+  color: #abb2bf;
+}
+.syntax--source.syntax--elixir .syntax--source.syntax--embedded.syntax--source {
+  color: #abb2bf;
+}
+.syntax--source.syntax--elixir .syntax--constant.syntax--language,
+.syntax--source.syntax--elixir .syntax--constant.syntax--numeric,
+.syntax--source.syntax--elixir .syntax--constant.syntax--definition {
+  color: #61afef;
+}
+.syntax--source.syntax--elixir .syntax--variable.syntax--definition,
+.syntax--source.syntax--elixir .syntax--variable.syntax--anonymous {
+  color: #c678dd;
+}
+.syntax--source.syntax--elixir .syntax--quoted {
+  color: #98c379;
+}
+.syntax--source.syntax--elixir .syntax--keyword.syntax--special-method,
+.syntax--source.syntax--elixir .syntax--embedded.syntax--section,
+.syntax--source.syntax--elixir .syntax--embedded.syntax--source.syntax--empty {
+  color: #e06c75;
+}
+.syntax--source.syntax--elixir .syntax--readwrite.syntax--module .syntax--punctuation {
+  color: #e06c75;
+}
+.syntax--source.syntax--elixir .syntax--regexp.syntax--section,
+.syntax--source.syntax--elixir .syntax--regexp.syntax--string {
+  color: #be5046;
+}
+.syntax--source.syntax--elixir .syntax--separator,
+.syntax--source.syntax--elixir .syntax--keyword.syntax--operator {
+  color: #d19a66;
+}
+.syntax--source.syntax--elixir .syntax--variable.syntax--constant {
+  color: #e5c07b;
+}
+.syntax--source.syntax--elixir .syntax--array,
+.syntax--source.syntax--elixir .syntax--scope,
+.syntax--source.syntax--elixir .syntax--section {
+  color: #828997;
+}
+.syntax--source.syntax--gfm .syntax--markup {
+  -webkit-font-smoothing: auto;
+}
+.syntax--source.syntax--gfm .syntax--link .syntax--entity {
+  color: #61afef;
+}
+.syntax--source.syntax--go .syntax--storage.syntax--type.syntax--string {
+  color: #c678dd;
+}
+.syntax--source.syntax--ini .syntax--keyword.syntax--other.syntax--definition.syntax--ini {
+  color: #e06c75;
+}
+.syntax--source.syntax--java .syntax--storage.syntax--modifier.syntax--import {
+  color: #e5c07b;
+}
+.syntax--source.syntax--java .syntax--storage.syntax--type {
+  color: #e5c07b;
+}
+.syntax--source.syntax--java .syntax--keyword.syntax--operator.syntax--instanceof {
+  color: #c678dd;
+}
+.syntax--source.syntax--java-properties .syntax--meta.syntax--key-pair {
+  color: #e06c75;
+}
+.syntax--source.syntax--java-properties .syntax--meta.syntax--key-pair > .syntax--punctuation {
+  color: #abb2bf;
+}
+.syntax--source.syntax--js .syntax--keyword.syntax--operator {
+  color: #56b6c2;
+}
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--delete,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--in,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--of,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--instanceof,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--new,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--typeof,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--void {
+  color: #c678dd;
+}
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--string.syntax--quoted.syntax--json {
+  color: #e06c75;
+}
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation.syntax--string {
+  color: #e06c75;
+}
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json,
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json,
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation,
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation {
+  color: #98c379;
+}
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--constant.syntax--language.syntax--json,
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--constant.syntax--language.syntax--json {
+  color: #56b6c2;
+}
+.syntax--source.syntax--ruby .syntax--constant.syntax--other.syntax--symbol > .syntax--punctuation {
+  color: inherit;
+}
+.syntax--source.syntax--python .syntax--keyword.syntax--operator.syntax--logical.syntax--python {
+  color: #c678dd;
+}
+.syntax--source.syntax--python .syntax--variable.syntax--parameter {
+  color: #d19a66;
+}
+</style>
+  </head>
+  <body class='markdown-preview' data-use-github-style><h1 id="week-3-implementing-algorithms">Week 3: Implementing algorithms</h1>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li><strong>To understand the steps involved in implementing an algorithm.</strong></li>
+<li><strong>To learn how to experimentally evaluate an algorithm.</strong></li>
+</ul>
+<h2 id="lectures-notes">Lectures notes</h2>
+<h3 id="implementing-an-algorithm">Implementing an algorithm</h3>
+<p>The goal of this week is learning how to implement an algorithm. This is potentially more complicated than it sounds, depending on the algorithm, because we usually have the description of an algorithm at a reasonable high level, but we need to get to a relatively low level before we can write the code that tells the computer how to run the algorithm.</p>
+<h4 id="binary-search">Binary search</h4>
+<p>As an example we take <em>binary search</em>. This is the search strategy you use when you look up a word in a dictionary---at least it used to be when dictionaries were printed on paper. You don't search from the beginning of a sequence of words, rather you exploit that the words are sorted, so you can look in the middle of your set of words and check if this is the word you are looking for. If it is not, you can check if the middle word is lexicographically smaller or larger than the word you are searching for. If it is smaller, you know that if the word you are looking for is in the dictionary, then it must be in the last half of the set. If it is larger, you know that the word must be in the first half of the set.</p>
+<p>This approach is faster than a linear search through the elements in the dictionary. At each step, we can discard half of the elements in the dictionary, so the time to find the element we are looking for is O(log n) instead of O(n).</p>
+<p>That is the prose description of the algorithm. We can try to break it into a more step-like description:</p>
+<ul>
+<li>Check the middle element of a list to see if it is what you are looking for. If it is, return <code>True</code>.</li>
+<li>If the middle element is not what you are searching for, check if it is larger or smaller than the element you are looking for.</li>
+<li>If smaller: search in the list following the middle element.</li>
+<li>If larger: search in the list up until the middle element.</li>
+</ul>
+<p>This has a form that looks like we can immediately translate it into code, but code requires just a little more. First, we need to decide what interface the search function should have. We are going to just use it to check if an element is found in the list, not where it is, so we want it to return <code>True</code> or <code>False</code>, and we want it to be called with the element we search for and the (sorted) list to search in.</p>
+<p>We can start with implementing a simple linear search. This can work as a substitute for our algorithm until we get it up and running, and we can use it for testing later on as well. This function could look like this:</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>linear_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--repeat syntax--python"><span>for</span></span><span>&nbsp;</span><span>y</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--logical syntax--python"><span>in</span></span><span>&nbsp;</span><span>lst</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span>x</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>y</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>True</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>False</span></span></span></div></pre>
+<p>To be able to replace this function with the binary search, we need that function to have the same interface.</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;do&nbsp;binary&nbsp;search</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>pass</span></span></span></div></pre>
+<p>The <code>pass</code> keyword here is just a way to make the function syntactically valid without us actually doing anything in the function. That is what we need to do now.</p>
+<p>The algorithm wants us to check the middle element and then potentially search the first or the last half of <code>lst</code>. Now, we <em>could</em> implement a recursive function that splits <code>lst</code> but we learned last week that this would involve copying all the elements into the new list. If we took that approach, each call to the algorithm would take time O(n) so we would end up with an O(n log n) algorithm instead of an O(log n) algorithm. We want to avoid this, so we keep track of pointers into the list instead, and write the function on this form:</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>recurse</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>start</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>end</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;search&nbsp;between&nbsp;start&nbsp;and&nbsp;end</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>pass</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>0</span></span><span>,&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span class="syntax--support syntax--function syntax--builtin syntax--python"><span>len</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>lst</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div></pre>
+<p>Now we have set everything up to implement the algorithm, so this is a perfect time for you to try it out yourself. Can you implement the algorithm, as it is described above, by filling out the body of <code>recurse</code>?</p>
+<p>I will give you a chance to try.</p>
+<p>Back again, now? Okay. You might have gotten it working, but let me still walk you through how I would continue from here.</p>
+<p>Now, <code>recurse</code> should search in <code>lst</code> between <code>start</code> and <code>end</code>, but we have to be more precise about what that means. So first we make the invariant that <code>x</code>, if it exists in <code>lst</code>, then it is in <code>x[start:end]</code>. This means, among other things, that we index from <em>and including</em> <code>start</code> and to <em>but not including</em> <code>end</code>. This, in turn, means that if <code>start == end</code> then the list we should search in is empty, so we can return <code>False</code>.</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>recurse</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>start</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>end</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>end</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>False</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;other&nbsp;cases&nbsp;here</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>pass</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>0</span></span><span>,&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span class="syntax--support syntax--function syntax--builtin syntax--python"><span>len</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>lst</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div></pre>
+<p>We should also explicitly state the invariant that <code>start &lt;= end</code>. We don't really need it right now, but if we want the invariant to be that if <code>x</code> is in <code>lst</code> then it is in <code>lst[start:end]</code>, then we want that additional invariant. It also makes sure that testing <code>start == end</code> as the termination condition for the recursion is sufficient.</p>
+<p>It is always a good idea to be explicit about invariants, so let us annotation the function with them:</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>recurse</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>start</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>end</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;=&nbsp;end&nbsp;and&nbsp;x&nbsp;might&nbsp;be&nbsp;in&nbsp;lst[start:end].</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>end</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>False</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;other&nbsp;cases&nbsp;here</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>pass</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>0</span></span><span>,&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span class="syntax--support syntax--function syntax--builtin syntax--python"><span>len</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>lst</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div></pre>
+<p>The invariant, incidentally, also guarantees the post-condition that if we make it past the first <code>if</code> statement, then <code>start &lt; end</code>.</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>recurse</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>start</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>end</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;=&nbsp;end&nbsp;and&nbsp;x&nbsp;might&nbsp;be&nbsp;in&nbsp;lst[start:end].</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>end</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>False</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;&nbsp;end</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;other&nbsp;cases&nbsp;here</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>pass</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>0</span></span><span>,&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span class="syntax--support syntax--function syntax--builtin syntax--python"><span>len</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>lst</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div></pre>
+<p>That might come in handy later.</p>
+<p>But first, let us consider the next step in the algorithm. Here we need to check the middle element of the list. In <code>recurse</code>, the list we are interested in is, of course, <code>lst[start:end]</code> so the middle element must be computed from <code>start</code> and <code>end</code>. We get the index for it like this:</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>recurse</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>start</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>end</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;=&nbsp;end&nbsp;and&nbsp;x&nbsp;might&nbsp;be&nbsp;in&nbsp;lst[start:end].</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>end</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>False</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>i</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--python"><span>=</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>+</span></span><span>&nbsp;</span><span>(</span><span>end</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>-</span></span><span>&nbsp;</span><span>start</span><span>)</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>/</span><span>/</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>2</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span class="syntax--meta syntax--item-access syntax--python"><span>lst</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>[</span></span><span class="syntax--meta syntax--item-access syntax--arguments syntax--python"><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>]</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>x</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>True</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;&nbsp;end</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;other&nbsp;cases&nbsp;here</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>pass</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>0</span></span><span>,&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span class="syntax--support syntax--function syntax--builtin syntax--python"><span>len</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>lst</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div></pre>
+<p>Here, I've both calculated the middle index and checked if the middle element is the one we are searching for. If it is, we should just return <code>True</code>.</p>
+<p>All that remains is implementing the two recursive calls when the middle element is not the one we are searching for. This, we could do as follows:</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>recurse</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>start</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>end</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;=&nbsp;end&nbsp;and&nbsp;x&nbsp;might&nbsp;be&nbsp;in&nbsp;lst[start:end].</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>end</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>False</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>i</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--python"><span>=</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>+</span></span><span>&nbsp;</span><span>(</span><span>end</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>-</span></span><span>&nbsp;</span><span>start</span><span>)</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>/</span><span>/</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>2</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span class="syntax--meta syntax--item-access syntax--python"><span>lst</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>[</span></span><span class="syntax--meta syntax--item-access syntax--arguments syntax--python"><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>]</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>x</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>True</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;&nbsp;end</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>elif</span></span><span>&nbsp;</span><span class="syntax--meta syntax--item-access syntax--python"><span>lst</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>[</span></span><span class="syntax--meta syntax--item-access syntax--arguments syntax--python"><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>]</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>&lt;</span></span><span>&nbsp;</span><span>x</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>i</span><span>,&nbsp;</span><span>end</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>else</span></span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>start</span><span>,&nbsp;</span><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>0</span></span><span>,&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span class="syntax--support syntax--function syntax--builtin syntax--python"><span>len</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>lst</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div></pre>
+<p>This <em>looks</em> reasonable, but it is actually incorrect. It is one of those cases where the prose explanation of the algorithm is imprecise and we need to do better in the code. It is correct that we should look in the first or last half of the list, respectively, but implicit in calling recursively is the expectation that we only call recursively on problems that are <em>smaller</em> than the one we are already trying to deal with. If we simply call recursively with the exact same problem as we are trying to handle we will never get anyway.</p>
+<p>Can this happen here? I'm glad you asked. Yes it can. The expression we use to compute <code>i</code> will set <code>i</code> to <code>start</code> if <code>end = start + 1</code>. We know that <code>start</code> is not equal to <code>end</code> at this point, but we could be looking at a list of length one, and if that is the case, then <code>start == i</code>. If <code>lst[i] &gt; x</code>, this will not be a problem. We will recurse with <code>start == end</code> and terminate. No worries. If <code>lst[i] &lt; x</code>, though, we will recurse with <code>recurse(i, end)</code> which is the same as <code>recurse(start, end)</code>. We are not reducing the problem, and we will just keep recursing until Python complaints that we have used up all its stack space.</p>
+<p>Whenever we recurse, we must make sure that we recurse on a problem smaller than the one we are currently considering, so we must make sure that the interval is smaller for binary search.</p>
+<p>From how we compute <code>i</code> we know that <code>start &lt;= i &lt; end</code>. This means that we can recurse as <code>recurse(i + 1, end)</code> and still satisfy the function invariant <code>start &lt;= end</code>, and since we only recurse when we know that <code>lst[i]</code> is not the element we are searching for, we can recurse this way and satisfy both invariants of the function. We can thus update the function to look like this:</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>recurse</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>start</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>end</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;=&nbsp;end&nbsp;and&nbsp;x&nbsp;might&nbsp;be&nbsp;in&nbsp;lst[start:end].</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>end</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>False</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>i</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--python"><span>=</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>+</span></span><span>&nbsp;</span><span>(</span><span>end</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>-</span></span><span>&nbsp;</span><span>start</span><span>)</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>/</span><span>/</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>2</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span class="syntax--meta syntax--item-access syntax--python"><span>lst</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>[</span></span><span class="syntax--meta syntax--item-access syntax--arguments syntax--python"><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>]</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>x</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>True</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;&nbsp;end</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>elif</span></span><span>&nbsp;</span><span class="syntax--meta syntax--item-access syntax--python"><span>lst</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>[</span></span><span class="syntax--meta syntax--item-access syntax--arguments syntax--python"><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>]</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>&lt;</span></span><span>&nbsp;</span><span>x</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>i</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>+</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>1</span></span><span>,&nbsp;</span><span>end</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>else</span></span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>start</span><span>,&nbsp;</span><span>i</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>-</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>1</span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>0</span></span><span>,&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span class="syntax--support syntax--function syntax--builtin syntax--python"><span>len</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>lst</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div></pre>
+<p>We leave out the <code>i</code>th element in the recursive calls, so all should be fine now.</p>
+<p>But wait! Our reasoning tells us that it is okay to call <code>recurse(i + 1, end)</code>, but in this version I also left out the <code>i</code>th element in <code>recurse(start, i - 1)</code>. Is <em>this</em> also correct?</p>
+<p>In this recursion we are certainly making the problem we try to solve smaller and we know that <code>lst[i]</code> is not what we are searching for, so it should be safe, right?</p>
+<p>No.</p>
+<p>Remember that the invariant considers the interval <code>start:end</code> with <code>start</code> included and <code>end</code> excluded. If we recurse on <code>i - 1</code> we are removing more than element <code>i</code> from the list we search in. we are also removing <code>i - 1</code>. So we were a little too fast with generalising here. The correct implementation is this:</p>
+<pre class="editor-colors lang-python"><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>binary_search</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>x</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>lst</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--meta syntax--function syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--storage syntax--type syntax--function syntax--python"><span>def</span></span><span>&nbsp;</span><span class="syntax--entity syntax--name syntax--function syntax--python"><span>recurse</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function syntax--parameters syntax--python"><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>start</span></span><span class="syntax--punctuation syntax--separator syntax--parameters syntax--python"><span>,</span></span><span>&nbsp;</span><span class="syntax--variable syntax--parameter syntax--function syntax--python"><span>end</span></span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--end syntax--python"><span>)</span></span><span class="syntax--punctuation syntax--section syntax--function syntax--begin syntax--python"><span>:</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;=&nbsp;end&nbsp;and&nbsp;x&nbsp;might&nbsp;be&nbsp;in&nbsp;lst[start:end].</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>end</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>False</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>i</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--python"><span>=</span></span><span>&nbsp;</span><span>start</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>+</span></span><span>&nbsp;</span><span>(</span><span>end</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>-</span></span><span>&nbsp;</span><span>start</span><span>)</span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--arithmetic syntax--python"><span>/</span><span>/</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>2</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>if</span></span><span>&nbsp;</span><span class="syntax--meta syntax--item-access syntax--python"><span>lst</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>[</span></span><span class="syntax--meta syntax--item-access syntax--arguments syntax--python"><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>]</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>==</span></span><span>&nbsp;</span><span>x</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--python"><span>True</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span class="syntax--punctuation syntax--whitespace syntax--comment syntax--leading syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="syntax--comment syntax--line syntax--number-sign syntax--python"><span class="syntax--punctuation syntax--definition syntax--comment syntax--python"><span>#</span></span><span>&nbsp;Inv:&nbsp;start&nbsp;&lt;&nbsp;end</span><span>&nbsp;</span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>elif</span></span><span>&nbsp;</span><span class="syntax--meta syntax--item-access syntax--python"><span>lst</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>[</span></span><span class="syntax--meta syntax--item-access syntax--arguments syntax--python"><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>]</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--python"><span>&lt;</span></span><span>&nbsp;</span><span>x</span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>i</span><span>,&nbsp;</span><span>end</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--conditional syntax--python"><span>else</span></span><span>:</span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>start</span><span>,&nbsp;</span><span>i</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--python"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--statement syntax--python"><span>return</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span>recurse</span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span class="syntax--constant syntax--numeric syntax--integer syntax--decimal syntax--python"><span>0</span></span><span>,&nbsp;</span><span class="syntax--meta syntax--function-call syntax--python"><span class="syntax--support syntax--function syntax--builtin syntax--python"><span>len</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--begin syntax--python"><span>(</span></span><span class="syntax--meta syntax--function-call syntax--arguments syntax--python"><span>lst</span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span><span class="syntax--punctuation syntax--definition syntax--arguments syntax--end syntax--python"><span>)</span></span></span></span></div></pre>
+<p>Binary search is a very simple algorithm, but as you can see, there is some work to be done to go from a high-level description of an algorithm---even a simple one such as this---to a working implementation.</p>
+<p>I chose binary search as the example because there are these special cases around the boundaries of the interval. Binary search is known to be difficult to get right in the first attempt. It is not unusual in its complexity, though. And it <em>is</em> a simple algorithm.</p>
+<p>The take home message is this: there are always some details missing in a prose description of an algorithm that you will have to flesh out when you implement it. Being careful with stating invariants and pre- and post-conditions can greatly alleviate the problems involved with translating prose into code.</p>
+<h3 id="testing-an-algorithm">Testing an algorithm</h3>
+<p>When it comes to implementations, you will want to test them. Even if you convince yourself that the algorithm is absolutely correct, all special cases are handled, all invariants are satisfied, all pigs are fed and ready to fly, there is always a chance that you have made a mistake at some point during the implementation. Testing can help reduce the chance of this.</p>
+<p>The point of testing is not to guarantee that an implementation is correct. There is not really any way of doing this through testing; if your implementation works as intended on all the input you provide it in your testing, that does not guarantee that the <em>next</em> data you could give it will not trigger an error. We use formal reasoning to construct algorithms that we can mathematically prove will solve a given problem, but when it comes to an actual implementation and testing it, the goal is not to test correctness but rather to try to break the implementation. If we can break our implementation, that is great. It means that we have discovered an error, and now we can fix it. Don't be kind to your code. Hit it as hard as you can. The harder you hit it without breaking it, the more confidence you will have in it, but the goal of testing really is to break the code if possible.</p>
+<p>How you attack your code when testing depends both on your actual code and your ingenuity. As long as you keep in mind that the goal is to break the code if possible, you are on the right path. There are some rules of thumbs, however, that often helps you trigger errors.</p>
+<p>Always give your code some common-case data first. You will feel silly if you do a lot of testing and then find out that the code doesn't handle the most basic cases.</p>
+<p>After that, throw special cases at the code. For numbers, make sure you use both negative and positive numbers and zero. For lists, give your code the empty list and lists of length one. What the special cases are depend on your code and your data, but always try to throw all those you can think of at your code.</p>
+<p>Finally, if you can generate representative but random data, use that to test your code. Even when we try as hard as we can, it is hard to figure out data that really stresses our functions. Using random data enables us to test our code on large collections of input without having to dream up the data ourselves, and as an added benefit, random data is not likely to be coloured by our biased belief of what input data should look like, so it is often more successful at breaking our code.</p>
+<h3 id="evaluating-running-times">Evaluating running times</h3>
+<p>Just as we should test our code to see if there are errors in its functionality, even when we have proven that the algorithm is correct, we should also test its running time, even if we have proved its running time analytically. It is quite easy to make a mistake in an implementation that doesn't affect the correctness but changes the running time. Therefore, you should always run some experiments to validate that the running time of your implementation is what you would expect.</p>
+<p>You can find a Jupyter Notebook <a href="src/Performance.ipynb">here</a> that does this for the binary search. Download it and experiment with it.</p>
+<h2 id="exercises-">Exercises:</h2>
+<ul>
+<li><a href="exercises/Implementing_binary_search.ipynb">Implementing binary search</a></li>
+</ul></body>
+</html>
